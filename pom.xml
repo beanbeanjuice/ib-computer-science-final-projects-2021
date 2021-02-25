@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.beanbeanjuice</groupId>
-    <artifactId>Final Computer Science Project</artifactId>
+    <artifactId>Final-Computer-Science-Project</artifactId>
     <version>1.0.0</version>
 
     <properties>
@@ -15,15 +15,13 @@
 
     <dependencies>
 
-
-
-
         <!-- NEEDED FOR PASSWORD ENCRYPTION -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.15</version>
         </dependency>
+
 
     </dependencies>
 
