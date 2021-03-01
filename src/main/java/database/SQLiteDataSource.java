@@ -13,7 +13,9 @@ public class SQLiteDataSource {
 
     private final HikariConfig config;
     private HikariDataSource dataSource;
+    
 
+    // Creates a new config
     public SQLiteDataSource() {
         config = new HikariConfig();
     }
@@ -32,10 +34,12 @@ public class SQLiteDataSource {
                 // If it doesn't exist, create a new file
                 if (dbFile.createNewFile()) {
 
+                    // Do stuff if the database is able to be created
                     System.out.println("Created database file.");
 
                 } else {
 
+                    // Do stuff if the database isn't able to be created
                     System.out.println("Could not create database file.");
                 }
             }
@@ -52,15 +56,19 @@ public class SQLiteDataSource {
         config.addDataSourceProperty("prepStmtCacheSize", "250");
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
+        // Creates a new SQLite database with the settings above
         dataSource = new HikariDataSource(config);
+
+        connection = dataSource.getConnection();
 
     }
 
     public void createUsersTable() {
 
         try {
-            Connection connection = getConnection();
+            Connection connection = getConnection(); // Gets a "connection" to the SQLite database
 
+            // Gets a statement object that can be executed
             Statement statement = connection.createStatement();
 
             // Language = SQLite -- SQL each has similar yet different language
@@ -78,6 +86,7 @@ public class SQLiteDataSource {
 
     }
 
+    // Retrieves the actual SQLite database connection
     public Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }

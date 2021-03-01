@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+// Each handler corresponds with it's own object.
+// This isn't necessary. A singular SQLiteHandler can be used,
+// however this starts to get messy.
 public class UserHandler {
 
     public User getUser(String username) {
@@ -43,7 +46,9 @@ public class UserHandler {
         } catch (SQLException e) {
 
             e.printStackTrace();
-            return null;
+
+            // If the user has an id of 0, that means the connection to the SQLite database was lost.
+            return new User(0, "0", "0");
 
         }
 
@@ -62,7 +67,7 @@ public class UserHandler {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
 
-            // Since we aren't returning anything, we execute it.
+            // Since we aren't returning anything, we execute it. We are updating the database.
             preparedStatement.execute();
             return true;
 
