@@ -29,39 +29,6 @@ public class User {
         return name;
     }
 
-    public boolean updateName(String name) {
-        this.name = name;
-
-        User user = Main.getUserHandler().getUser(name);
-        // First, check to see if the username is already taken
-        if (user != null) {
-            return false;
-        }
-
-        // Next, update it.
-
-        try {
-            Connection connection = Main.getSQLiteDataSource().getConnection();
-
-            // The question mark is a essentially a variable placeholder
-            // This is done to prevent, the unlikely, SQL injection
-            String arguments = "UPDATE users SET username = ? WHERE username = '" + name + "';";
-
-            // Since we want to edit some things in the statement, we use prepared statement
-            PreparedStatement preparedStatement = connection.prepareStatement(arguments);
-
-            preparedStatement.setString(1, name);
-
-            // Since we are returning something we execute the query
-            preparedStatement.execute();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-    }
-
     public String getPassword() {
         return password;
     }

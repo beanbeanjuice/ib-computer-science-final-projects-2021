@@ -13,6 +13,7 @@ public class SQLiteDataSource {
 
     private final HikariConfig config;
     private HikariDataSource dataSource;
+    Connection connection;
     
 
     // Creates a new config
@@ -59,8 +60,6 @@ public class SQLiteDataSource {
         // Creates a new SQLite database with the settings above
         dataSource = new HikariDataSource(config);
 
-        connection = dataSource.getConnection();
-
     }
 
     public void createUsersTable() {
@@ -86,9 +85,25 @@ public class SQLiteDataSource {
 
     }
 
+    public boolean createConnection() {
+
+        try {
+            connection = dataSource.getConnection();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+
+    }
+
     // Retrieves the actual SQLite database connection
+    // You want to return the SAME connection instead of
+    // getting a new connection, therefore the SQLite Database
+    // won't have concurrent connections slowing it down,
+    // and causing a SQLITE_BUSY error.
+    // SQLITE_BUSY - https://www.sqlite.org/rescode.html#busy
     public Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
+        return connection;
     }
 
 }

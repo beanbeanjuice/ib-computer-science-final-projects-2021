@@ -20,12 +20,14 @@ public class UserHandler {
 
             // The question mark is a essentially a variable placeholder
             // This is done to prevent, the unlikely, SQL injection
-            String arguments = "SELECT * FROM users WHERE username = ?;";
+            //String arguments = "SELECT * FROM users WHERE username = ?;";
+
+            String arguments = "SELECT * FROM users WHERE username = '" + username + "';";
 
             // Since we want to edit some things in the statement, we use prepared statement
             PreparedStatement preparedStatement = connection.prepareStatement(arguments);
 
-            preparedStatement.setString(1, username);
+            //preparedStatement.setString(1, username);
 
             // Since we are returning something we execute the query
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -56,7 +58,13 @@ public class UserHandler {
 
     public boolean addUser(String username, String password) {
 
+        // Check to see if the user exists.
+        if (getUser(username) != null) {
+            return false;
+        }
+
         try {
+
             Connection connection = Main.getSQLiteDataSource().getConnection();
 
             String arguments = "INSERT INTO users(username, password) VALUES(?, ?);";

@@ -17,6 +17,13 @@ public class Main {
         // Creates the database
         sqLiteDataSource.createDatabase("database.db");
 
+        // Create the connection to the database
+        boolean connected = sqLiteDataSource.createConnection();
+
+        if (connected) {
+            System.out.println("Connected to the database!");
+        }
+
         // Creates the table
         sqLiteDataSource.createUsersTable();
 
@@ -27,9 +34,8 @@ public class Main {
         System.out.println("Password: " + userHandler.getUser("test1").getPassword());
         //System.out.println(userHandler.getUser("test2").getID()); // Returns null because the user was never added
 
-        userHandler.getUser("test1").updateName("1test");
-        System.out.println("New Username: " + userHandler.getUser("1test").getName());
-        userHandler.getUser("1test").updatePassword("1password");
+        userHandler.getUser("test1").updatePassword("1password");
+        System.out.println("New Password: " + userHandler.getUser("test1").getPassword());
 
 
     }
