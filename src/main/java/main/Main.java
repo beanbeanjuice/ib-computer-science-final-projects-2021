@@ -25,6 +25,7 @@ public class Main extends Application {
         window.show();
 
         // Consumes the "X" button or Mac/Linux equivalent.
+        // Stops the program from just closing.
         window.setOnCloseRequest(e -> {
             e.consume();
             closeProgram();
