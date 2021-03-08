@@ -24,7 +24,8 @@ public class ConfirmationBox {
     public boolean display() {
         Stage window = new Stage();
 
-        window.initModality(Modality.APPLICATION_MODAL); // Block input events from other windows in the application until this one is taken care of
+        // Prevents input from any other spots on the application aside from this window.
+        window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
         window.setMinWidth(250);
         Label label = new Label();
