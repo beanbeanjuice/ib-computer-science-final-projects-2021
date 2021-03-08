@@ -22,13 +22,14 @@ public class StartScreen implements ApplicationScreen {
 
         int buttonWidth = 100;
 
-        Label label1 = new Label("Boggle: The Game");
-        //label1.setFont(fontHandler.getFont(Main.getTitleFont(), 50));
-        label1.setId("title");
+        Label label1 = new Label("Start Screen");
 
         // START GAME BUTTON
-        Button startButton = new Button("Start Game");
-        startButton.setOnAction(e -> Main.setWindow(new GameScreen()));
+        Button startButton = new Button("Game Screen");
+        startButton.setOnAction(e -> {
+            Main.setWindow(new GameScreen());
+            System.out.println("Switched to Game Screen!");
+        });
         startButton.setMaxWidth(buttonWidth);
         startButton.setMinWidth(buttonWidth);
 

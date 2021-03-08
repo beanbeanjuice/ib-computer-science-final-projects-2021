@@ -32,7 +32,7 @@ public class ConfirmationBox {
         label.setId("text");
 
         int buttonWidth = 100;
-        int buttonTextSize = 100;
+        int buttonTextSize = 10;
 
         // Create two buttons
         Button yesButton = new Button("Yes");
