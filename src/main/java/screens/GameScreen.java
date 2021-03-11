@@ -9,6 +9,9 @@ import javafx.scene.layout.VBox;
 import main.Main;
 import testclass.TestClass;
 
+/**
+ * A GameScreen that implements the ApplicationScreen
+ */
 public class GameScreen implements ApplicationScreen {
 
     private Scene gameScreen;

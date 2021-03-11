@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import main.Main;
 
+/**
+ * A StartScreen implementing the {@link ApplicationScreen} interface.
+ */
 public class StartScreen implements ApplicationScreen {
 
     private Scene startScene;
