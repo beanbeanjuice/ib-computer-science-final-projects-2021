@@ -1,6 +1,7 @@
 package database;
 
 import main.Main;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,31 +10,45 @@ import java.sql.SQLException;
 
 // This is an object that corresponds with a single row in the "users" table in the "database.db" file.
 // This is just an example, there can be a "Game" object or "Settings" object.
+
+/**
+ * A user class that is used as an example of retrieving/adding users from the {@link UserHandler}.
+ */
 public class User {
 
     private int id;
     private String name;
     private String password; // In an actual database, this will be the password hash
 
-    public User(int id, String name, String password) {
+    /**
+     * Create a new {@link User} object.
+     * @param id The {@link User} object's id.
+     * @param name The {@link User} object's name.
+     * @param password The {@link User} object's password (unencrypted).
+     */
+    public User(@NotNull Integer id, @NotNull String name, @NotNull String password) {
         this.id = id;
         this.name = name;
         this.password = password;
     }
 
-    public int getID() {
+    @NotNull
+    public Integer getID() {
         return id;
     }
 
+    @NotNull
     public String getName() {
         return name;
     }
 
+    @NotNull
     public String getPassword() {
         return password;
     }
 
-    public boolean updatePassword(String password) {
+    @NotNull
+    public Boolean updatePassword(@NotNull String password) {
         this.password = password;
 
         try {

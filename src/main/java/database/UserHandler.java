@@ -1,6 +1,7 @@
 package database;
 
 import main.Main;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,9 +11,18 @@ import java.sql.SQLException;
 // Each handler corresponds with it's own object.
 // This isn't necessary. A singular SQLiteHandler can be used,
 // however this starts to get messy.
+
+/**
+ * A handler for the {@link User} objects.
+ */
 public class UserHandler {
 
-    public User getUser(String username) {
+    /**
+     * Get a user object from the database.
+     * @param username The name of the {@link User} object.
+     * @return The {@link User} object.
+     */
+    public User getUser(@NotNull String username) {
 
         try {
 
@@ -56,7 +66,13 @@ public class UserHandler {
 
     }
 
-    public boolean addUser(String username, String password) {
+    /**
+     * Adds a {@link User} to the database.
+     * @param username The {@link User} object's username.
+     * @param password The {@link User} object's password (unencrypted).
+     * @return Whether the {@link User} object was successfully added or not.
+     */
+    public Boolean addUser(@NotNull String username, @NotNull String password) {
 
         // Check to see if the user exists.
         if (getUser(username) != null) {

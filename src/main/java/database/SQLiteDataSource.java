@@ -2,6 +2,7 @@ package database;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,19 +10,28 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * A class used for an SQLite Connection
+ */
 public class SQLiteDataSource {
 
     private final HikariConfig config;
     private HikariDataSource dataSource;
     Connection connection;
-    
 
-    // Creates a new config
+
+    /**
+     * Create a new {@link SQLiteDataSource} object.
+     */
     public SQLiteDataSource() {
         config = new HikariConfig();
     }
 
-    public void createDatabase(String filePath) {
+    /**
+     * Create a new SQLite Database
+     * @param filePath The filepath for the SQLite Database
+     */
+    public void createDatabase(@NotNull String filePath) {
 
         try {
 
@@ -62,6 +72,9 @@ public class SQLiteDataSource {
 
     }
 
+    /**
+     * Create a new 'Users' table in the SQLite Database.
+     */
     public void createUsersTable() {
 
         try {
@@ -85,7 +98,12 @@ public class SQLiteDataSource {
 
     }
 
-    public boolean createConnection() {
+    /**
+     * Create a connection to the SQLite Database
+     * @return Returns whether the connection was successful or not.
+     */
+    @NotNull
+    public Boolean createConnection() {
 
         try {
             connection = dataSource.getConnection();
@@ -102,6 +120,13 @@ public class SQLiteDataSource {
     // won't have concurrent connections slowing it down,
     // and causing a SQLITE_BUSY error.
     // SQLITE_BUSY - https://www.sqlite.org/rescode.html#busy
+
+    /**
+     * Gets the connected connection.
+     * @return Returns the {@link Connection} object.
+     * @throws SQLException If this happens, the connection failed.
+     */
+    @NotNull
     public Connection getConnection() throws SQLException {
         return connection;
     }
