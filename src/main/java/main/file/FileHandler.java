@@ -5,11 +5,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * A {@link FileHandler} used for retrieving files from the resource folder.
+ */
 public class FileHandler {
 
-    public File getResourceAsFile(String resourcePath) {
+    /**
+     * Get the file from the Resource folder.
+     * @param fileName The file name for the resource.
+     * @return Returns a {@link File} object.
+     */
+    public File getResourceAsFile(String fileName) {
         try {
-            InputStream in = ClassLoader.getSystemClassLoader().getResourceAsStream(resourcePath);
+            InputStream in = ClassLoader.getSystemClassLoader().getResourceAsStream(fileName);
             if (in == null) {
                 return null;
             }

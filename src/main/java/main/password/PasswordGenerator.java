@@ -44,6 +44,7 @@ public class PasswordGenerator {
         this.useDictionary = useDictionary;
     }
 
+    // If a length is not specified, it creates a PasswordGenerator object with a length of 10.
     public PasswordGenerator(@NotNull Boolean includeSymbols, @NotNull Boolean includeNumbers, @NotNull Boolean useDictionary) {
         length = 10;
 
@@ -70,31 +71,28 @@ public class PasswordGenerator {
 
         while (count < length) {
 
+            // Chooses a random number between 1 and 4.
             int selection = random.nextInt(4) + 1;
 
+            // Symbols
+            // Numbers
+            // Dictionary
+            // Letters
             switch (selection) {
-
-                // Symbols
-                case 1: {
+                case 1 -> { // If the password should include a symbol, add one.
                     if (includeSymbols) {
                         passwordArray[count] = chooseRandomSymbol();
                         count++;
                     }
-                    break;
                 }
-
-                // Numbers
-                case 2: {
+                case 2 -> { // If the password should include a number, add one.
                     if (includeNumbers) {
                         passwordArray[count] = chooseRandomNumber();
                         count++;
                     }
-                    break;
                 }
-
-                // Dictionary
-                case 3: {
-                    if (useDictionary) {
+                case 3 -> {
+                    if (useDictionary) { // If the password should include a word from the dictionary, add one.
 
                         int randomNum = random.nextInt((length - count)) + 1;
 
@@ -102,36 +100,39 @@ public class PasswordGenerator {
                         // it doesn't try to find a word that has 1000000 characters.
                         if (Main.getPasswordDictionary().getDictionary().get(randomNum) == null) {
 
+                            // This makes sure it only chooses a password which its length exists.
+                            // For example, no word with length of 26 exists in the dictionary.csv file.
+                            // However, the max length of a word in the dictionary.csv is above 26.
                             while (Main.getPasswordDictionary().getDictionary().get(randomNum) == null) {
                                 randomNum = random.nextInt((Main.getPasswordDictionary().getMaxLength())) + 1;
                             }
                         }
 
+                        // Once it has found a length that works, choose a random length.
                         String randomWord = chooseRandomWord(randomNum);
 
+                        // This makes sure it adds the letters of the word to the array.
+                        // Not the entire word to the index.
                         for (int i = 0; i < randomNum; i++) {
                             passwordArray[count++] = String.valueOf(randomWord.charAt(i));
                         }
                     }
-                    break;
                 }
-
-                // Letters
-                case 4: {
+                case 4 -> { // Add a random letter to the password.
 
                     passwordArray[count] = chooseRandomLetter();
                     count++;
 
-                    break;
                 }
-
             }
 
         }
 
+        // The password will be an array. It needs to be converted to a string.
         String password = convertToString(passwordArray);
 
-        if (!checkPassword(password)) {
+        // Checks to see if all criteria is met.
+        if (!checkPassword()) {
             password = generatePassword();
         }
 
@@ -139,29 +140,22 @@ public class PasswordGenerator {
     }
 
     @NotNull
-    private Boolean checkPassword(@NotNull String password) {
+    private Boolean checkPassword() {
 
         if (includeSymbols) {
-
             if (!usedSymbol) {
                 return false;
             }
-
         }
 
         if (includeNumbers) {
-
             if (!usedNumber) {
                 return false;
             }
         }
 
         if (useDictionary) {
-
-            if (!usedDictionary) {
-                return false;
-            }
-
+            return usedDictionary;
         }
 
         return true;
@@ -172,6 +166,8 @@ public class PasswordGenerator {
     private String convertToString(@NotNull String[] passwordArray) {
         StringBuilder password = new StringBuilder();
 
+        // Goes through every character in the passwordArray
+        // And appends it to the password StringBuilder.
         for (String string : passwordArray) {
             password.append(string);
         }

@@ -1,15 +1,16 @@
 package main.password;
 
 import main.Main;
-import main.file.FileHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * A class used for PasswordDictionary
+ */
 public class PasswordDictionary {
 
     private ArrayList<String> initialDictionary;
@@ -30,14 +31,13 @@ public class PasswordDictionary {
 
     }
 
+    /**
+     * Get the dictionary. The HashMap key is the amount of letters in that word.
+     * @return The dictionary HashMap.
+     */
     @NotNull
     public HashMap<Integer, ArrayList<String>> getDictionary() {
         return dictionary;
-    }
-
-    @NotNull
-    public ArrayList<String> getRawDictionary() {
-        return initialDictionary;
     }
 
     private void generateDictionary() {
