@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.beanbeanjuice</groupId>
-    <artifactId>Final Computer Science Project</artifactId>
+    <artifactId>Final-Computer-Science-Project</artifactId>
     <version>1.0.0</version>
 
     <properties>
@@ -29,6 +29,13 @@
             <artifactId>annotations</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jetbrains/annotations -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>16.0.1</version>
         </dependency>
 
     </dependencies>
