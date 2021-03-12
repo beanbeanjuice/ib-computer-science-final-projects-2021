@@ -11,8 +11,8 @@ public class PasswordHandler {
     }
 
     @NotNull
-    public Boolean comparePasswords(@NotNull String unEncryptedPassword, @NotNull String encryptedPasswordInDatabase) {
-        return (DigestUtils.sha512Hex(unEncryptedPassword).equals(encryptedPasswordInDatabase));
+    public Boolean comparePasswords(@NotNull String encryptedPassword, @NotNull String encryptedPasswordInDatabase) {
+        return (encryptedPassword.equals(encryptedPasswordInDatabase));
     }
 
 }
