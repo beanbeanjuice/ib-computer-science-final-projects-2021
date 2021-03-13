@@ -4,6 +4,7 @@ import handler.DatabaseHandler;
 import handler.LoginHandler;
 import handler.PasswordHandler;
 import object.User;
+import org.jetbrains.annotations.NotNull;
 
 public class Main {
 
@@ -11,6 +12,7 @@ public class Main {
     private static DatabaseHandler databaseHandler;
     private static PasswordHandler passwordHandler;
     private static Boolean loggedIn;
+    private static User currentUser;
 
     public static void main(String[] args) {
 
@@ -25,8 +27,20 @@ public class Main {
 
     }
 
-    public static Boolean isLoggedIn() {
+    public static void setLoggedIn(@NotNull Boolean bool) {
+        loggedIn = bool;
+    }
+
+    public static Boolean getLoggedIn() {
         return loggedIn;
+    }
+
+    public static void setCurrentUser(User user) {
+        currentUser = user;
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
     }
 
     // This is so you can get the loginHandler from any class.

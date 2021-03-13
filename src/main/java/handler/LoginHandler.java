@@ -11,20 +11,32 @@ public class LoginHandler {
     @NotNull
     public LoginInformation login(@NotNull String username, @NotNull String password) {
 
+        // To login, we compare the encrypted hashes to each other.
+        // Therefore, we need to convert the string password into a hash.
         String encryptedPassword = Main.getPasswordHandler().encryptPassword(password);
 
-        User temporaryUser = new User(username, encryptedPassword);
-
-        if (!Main.getDatabaseHandler().isInDatabase(temporaryUser)) {
+        // First, check if an account with the username does exist.
+        // If it doesn't exist, there is no need to continue.
+        // Inform the user if the username does not exist.
+        if (!Main.getDatabaseHandler().isInDatabase(username)) {
             return LoginInformation.NO_USER;
         }
 
-        User user = Main.getDatabaseHandler().getUser(temporaryUser);
+        // Since it does exist, get the user.
+        User user = Main.getDatabaseHandler().getUser(username);
 
+        // Now we compare the password the user entered to the password stored in the database.
+        // Inform the user if the passwords are incorrect.
         if (!Main.getPasswordHandler().comparePasswords(encryptedPassword, user.getEncryptedPassword())) {
             return LoginInformation.INCORRECT_PASSWORD;
         }
 
+        // If everything passes, set the current user to the user
+        // and set loggedIn to true.
+        Main.setCurrentUser(user);
+        Main.setLoggedIn(true);
+
+        // Inform the user that there was a successful login.
         return LoginInformation.SUCCESSFUL_LOGIN;
 
     }
@@ -32,18 +44,27 @@ public class LoginHandler {
     @NotNull
     public SignupInformation signup(@NotNull String username, @NotNull String password) {
 
+        // Same reason as in the login method.
+        // We need the encrypted password.
         String encryptedPassword = Main.getPasswordHandler().encryptPassword(password);
-        User temporaryUser = new User(username, password);
 
-        if (Main.getDatabaseHandler().isInDatabase(temporaryUser)) {
+        // If an account with that username already exists, inform the user they cannot signup.
+        if (Main.getDatabaseHandler().isInDatabase(username)) {
             return SignupInformation.USER_ALREADY_EXISTS;
         }
 
+        // If an account doesn't exist, make one.
+        if (Main.getDatabaseHandler().addToDatabase(username, encryptedPassword)) {
 
-        if (Main.getDatabaseHandler().addToDatabase(username, password)) {
+            // If the account is successfully created, then retrieve that account and set it to logged in.
+            Main.setCurrentUser(Main.getDatabaseHandler().getUser(username));
+            Main.setLoggedIn(true);
+
+            // Inform the user that the signup was successful.
             return SignupInformation.SUCCESSFUL_SIGNUP;
         }
 
+        // If something wrong occurs, ie losing an internet connection, inform the user.
         return SignupInformation.CONNECTION_ERROR;
 
     }
