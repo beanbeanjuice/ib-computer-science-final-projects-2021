@@ -81,8 +81,10 @@ public class UserHandler {
 
         try {
 
+            // Retrieves the connection from the Main class.
             Connection connection = Main.getSQLiteDataSource().getConnection();
 
+            // SQLite Syntax.
             String arguments = "INSERT INTO users(username, password) VALUES(?, ?);";
 
             // Again, prepare the statement to be used with different variables

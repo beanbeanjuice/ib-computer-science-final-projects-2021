@@ -37,14 +37,18 @@ public class Main {
         userHandler.getUser("test1").updatePassword("1password");
         System.out.println("New Password: " + userHandler.getUser("test1").getPassword());
 
-
     }
 
-    // Get the conenction from any class
+    /**
+     * @return The {@link SQLiteDataSource} that was created in the {@link Main} class.
+     */
     public static SQLiteDataSource getSQLiteDataSource() {
         return sqLiteDataSource;
     }
 
+    /**
+     * @return The {@link UserHandler} that was created in the {@link Main} class.
+     */
     public static UserHandler getUserHandler() {
         return userHandler;
     }

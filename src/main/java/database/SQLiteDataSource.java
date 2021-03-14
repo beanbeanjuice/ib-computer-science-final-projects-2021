@@ -19,7 +19,6 @@ public class SQLiteDataSource {
     private HikariDataSource dataSource;
     Connection connection;
 
-
     /**
      * Create a new {@link SQLiteDataSource} object.
      */

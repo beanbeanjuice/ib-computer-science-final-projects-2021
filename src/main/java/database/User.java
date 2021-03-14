@@ -32,21 +32,35 @@ public class User {
         this.password = password;
     }
 
+    /**
+     * @return The ID of the specified {@link User}.
+     */
     @NotNull
     public Integer getID() {
         return id;
     }
 
+    /**
+     * @return The ID of the specified {@link User}.
+     */
     @NotNull
     public String getName() {
         return name;
     }
 
+    /**
+     * @return The (unencrypted) password of the specified {@link User}.
+     */
     @NotNull
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Updates the specified {@link User}'s password.
+     * @param password The new password for the {@link User}.
+     * @return Whether or not changing the password was successful.
+     */
     @NotNull
     public Boolean updatePassword(@NotNull String password) {
         this.password = password;
