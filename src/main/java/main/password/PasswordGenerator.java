@@ -19,8 +19,13 @@ public class PasswordGenerator {
     private boolean usedNumber;
     private boolean usedDictionary;
 
+    // Symbols that can be used in passwords. Fully customisable.
     private String symbols = "!@#$%&*()";
+
+    // The alphabet in lowercase. Fully customisable.
     private String alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+    // Numbers that can be used. Fully customisable.
     private String numbers = "0123456789";
 
     /**
@@ -35,6 +40,7 @@ public class PasswordGenerator {
     public PasswordGenerator(@NotNull Integer length, @NotNull Boolean includeSymbols, @NotNull Boolean includeNumbers, @NotNull Boolean useDictionary) {
         this.length = length;
 
+        // Minimum Password Length. Can be changed to your liking.
         if (length < 10) {
             this.length = 10;
         }
@@ -44,7 +50,14 @@ public class PasswordGenerator {
         this.useDictionary = useDictionary;
     }
 
-    // If a length is not specified, it creates a PasswordGenerator object with a length of 10.
+    /**
+     * Generate a new {@link PasswordGenerator} object.
+     * Symbols take precedence over numbers.
+     * Numbers take precedence over the dictionary.
+     * If a length is not chosen, a default length of 10 is used.
+     * @param includeSymbols Whether or not to randomly include symbols.
+     * @param useDictionary Choose whether or not to include dictionary words.
+     */
     public PasswordGenerator(@NotNull Boolean includeSymbols, @NotNull Boolean includeNumbers, @NotNull Boolean useDictionary) {
         length = 10;
 
@@ -139,21 +152,27 @@ public class PasswordGenerator {
         return password;
     }
 
+    /**
+     * @return Whether or not the password generated follows all of the specifications.
+     */
     @NotNull
     private Boolean checkPassword() {
 
+        // Checks if the password should, and does include symbols.
         if (includeSymbols) {
             if (!usedSymbol) {
                 return false;
             }
         }
 
+        // Checks of the password should, and does include numbers.
         if (includeNumbers) {
             if (!usedNumber) {
                 return false;
             }
         }
 
+        // Checks if the password should, and does include words from the specified dictionary file.
         if (useDictionary) {
             return usedDictionary;
         }
@@ -162,6 +181,11 @@ public class PasswordGenerator {
 
     }
 
+    /**
+     * Converts the password array to a {@link String}.
+     * @param passwordArray The {@link String[]} needed to convert to a {@link String}.
+     * @return The converted {@link String}.
+     */
     @NotNull
     private String convertToString(@NotNull String[] passwordArray) {
         StringBuilder password = new StringBuilder();
@@ -175,13 +199,21 @@ public class PasswordGenerator {
         return password.toString();
     }
 
+    /**
+     * Chooses a random word that is less than the amount of spots left.
+     * @param spotsLeft The amount of spots left in the password {@link String[]}.
+     * @return The word in the dictionary {@link java.io.File File} that was randomly chosen.
+     */
     @NotNull
     private String chooseRandomWord(@NotNull Integer spotsLeft) {
         Random random = new Random();
+
+        // Retrieves the ArrayList of words that have that many spots left.
         ArrayList<String> wordArrayList = Main.getPasswordDictionary().getDictionary().get(spotsLeft);
 
         usedDictionary = true;
 
+        // Base case. If the array list size is 1 word, choose that 1 word.
         if (wordArrayList.size() == 1) {
             return randomUppercase(wordArrayList.get(0));
         } else {
@@ -191,15 +223,24 @@ public class PasswordGenerator {
         }
     }
 
+    /**
+     * Chooses a random number between 0-9.
+     * @return A {@link String} version of a random number.
+     */
     @NotNull
     private String chooseRandomNumber() {
         Random random = new Random();
 
         usedNumber = true;
 
+        // Returns a random number from the numbers String.
         return String.valueOf(numbers.charAt(random.nextInt(numbers.length() - 1) + 1));
     }
 
+    /**
+     * Chooses a random symbol specified in the variables.
+     * @return A {@link String} version of a random symbol.
+     */
     @NotNull
     private String chooseRandomSymbol() {
 
@@ -207,21 +248,37 @@ public class PasswordGenerator {
 
         usedSymbol = true;
 
+        // Returns a random symbol from the symbols String.
         return String.valueOf(symbols.charAt(random.nextInt(symbols.length() - 1) + 1));
     }
 
+    /**
+     * Chooses a random letter in the alphabet.
+     * @return A {@link String} version of a random letter.
+     */
     @NotNull
     private String chooseRandomLetter() {
         Random random = new Random();
+
+        // Chooses a random letter.
         int randomNum = random.nextInt(alphabet.length() - 1) + 1;
 
         return randomUppercase(String.valueOf(alphabet.charAt(randomNum)));
     }
 
+    /**
+     * Goes through a {@link String} and randomly uppercases some letters.
+     * @param word The {@link String} to randomly uppercase.
+     * @return The randomly uppercased {@link String}.
+     */
     @NotNull
     private String randomUppercase(@NotNull String word) {
         Random random = new Random();
+
+        // Splits the character array into individual characters.
         String[] characterArray = word.split("");
+
+        // Creates a new StringBuilder.
         StringBuilder wordBuild = new StringBuilder();
 
         for (int i = 0; i < word.length(); i++) {
@@ -229,9 +286,11 @@ public class PasswordGenerator {
                 characterArray[i] = characterArray[i].toUpperCase();
             }
 
+            // Appends a character to the StringBuilder.
             wordBuild.append(characterArray[i]);
         }
 
+        // Returns the randomly uppercased String.
         return wordBuild.toString();
     }
 

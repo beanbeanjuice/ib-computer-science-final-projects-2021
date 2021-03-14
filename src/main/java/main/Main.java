@@ -60,6 +60,7 @@ public class Main {
         System.out.println(passwordGenerator.generatePassword());
         System.out.println(passwordGenerator.generatePassword());
 
+        // A length of 1000 and includes everything.
         passwordGenerator = new PasswordGenerator(1000, true, true, true);
         System.out.println(passwordGenerator.generatePassword());
 

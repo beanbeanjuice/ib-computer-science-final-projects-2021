@@ -20,6 +20,10 @@ public class PasswordDictionary {
 
     private int maxLength = 0;
 
+    /**
+     * Creates a new {@link PasswordDictionary} for
+     * generating and parsing the dictionary.csv {@link File}.
+     */
     public PasswordDictionary() {
         dictionaryFile = Main.getFileHandler().getResourceAsFile("dictionary.csv");
 
@@ -32,14 +36,20 @@ public class PasswordDictionary {
     }
 
     /**
-     * Get the dictionary. The HashMap key is the amount of letters in that word.
-     * @return The dictionary HashMap.
+     * Get the dictionary. The {@link HashMap} key is the amount of letters in that word.
+     * @return The dictionary {@link HashMap}.
      */
     @NotNull
     public HashMap<Integer, ArrayList<String>> getDictionary() {
         return dictionary;
     }
 
+    /**
+     * Takes everything from the initial dictionary ArrayList
+     * and puts it into a {@link HashMap} with the word length
+     * as the key and an {@link ArrayList<String>} with words
+     * of the length of the key.
+     */
     private void generateDictionary() {
 
         for (String word : initialDictionary) {
@@ -56,6 +66,10 @@ public class PasswordDictionary {
         }
     }
 
+    /**
+     * Basically retrieves everything from the dictionary.csv {@link File}
+     * and puts it into it's own {@link ArrayList<String>}.
+     */
     private void generateInitialDictionary() {
 
         try (Scanner scanner = new Scanner(dictionaryFile)) {
