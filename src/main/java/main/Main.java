@@ -24,6 +24,8 @@ public class Main {
         System.out.println("1: " + loginHandler.login("bob", "testtest").getMessage());
         System.out.println("2: " + loginHandler.signup("bob", "testtest").getMessage());
         System.out.println("3: " + loginHandler.login("bob", "testtest").getMessage());
+        System.out.println("4: " + loginHandler.signup("Bob", "testtest").getMessage());
+        System.out.println("5: " + loginHandler.login("Bob", "test1").getMessage());
 
     }
 

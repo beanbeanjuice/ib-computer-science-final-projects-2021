@@ -38,7 +38,7 @@ public class DatabaseHandler {
     public Boolean isInDatabase(@NotNull String username) {
 
         for (User databaseUser : database) {
-            if (databaseUser.getUsername().equals(username)) {
+            if (databaseUser.getUsername().equalsIgnoreCase(username)) {
                 return true;
             }
         }
@@ -47,45 +47,11 @@ public class DatabaseHandler {
 
     }
 
-    @NotNull
-    public AccountInformation changeUsername(@NotNull String currentPassword, @NotNull String newUsername) {
-
-        User currentUser = Main.getCurrentUser();
-
-        String encryptedPassword = Main.getPasswordHandler().encryptPassword(currentPassword);
-        String encryptedPasswordInDatabase = currentUser.getEncryptedPassword();
-
-        if (Main.getPasswordHandler().comparePasswords(encryptedPassword, encryptedPasswordInDatabase)) {
-
-            if (currentUser.getUsername().equalsIgnoreCase(newUsername)) {
-                return AccountInformation.SAME_USERNAME;
-            }
-
-            User newUser = currentUser;
-            newUser.setUsername(newUsername);
-
-            if (!removeFromDatabase(currentUser)) {
-                return AccountInformation.CONNECTION_ERROR;
-            }
-
-            if (!addToDatabase(newUser)) {
-                return AccountInformation.CONNECTION_ERROR;
-            }
-
-            Main.setCurrentUser(newUser);
-            Main.setLoggedIn(true);
-            return AccountInformation.SUCCESS;
-
-        }
-
-        return AccountInformation.INCORRECT_PASSWORD;
-    }
-
     @Nullable
     public User getUser(@NotNull String username) {
 
         for (User user : database) {
-            if (user.getUsername().equals(username)) {
+            if (user.getUsername().equalsIgnoreCase(username)) {
                 return user;
             }
         }

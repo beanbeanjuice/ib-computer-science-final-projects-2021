@@ -44,17 +44,13 @@ public class LoginHandler {
     @NotNull
     public SignupInformation signup(@NotNull String username, @NotNull String password) {
 
-        // Same reason as in the login method.
-        // We need the encrypted password.
-        String encryptedPassword = Main.getPasswordHandler().encryptPassword(password);
-
         // If an account with that username already exists, inform the user they cannot signup.
         if (Main.getDatabaseHandler().isInDatabase(username)) {
             return SignupInformation.USER_ALREADY_EXISTS;
         }
 
         // If an account doesn't exist, make one.
-        if (Main.getDatabaseHandler().addToDatabase(username, encryptedPassword)) {
+        if (Main.getDatabaseHandler().addToDatabase(username, password)) {
 
             // If the account is successfully created, then retrieve that account and set it to logged in.
             Main.setCurrentUser(Main.getDatabaseHandler().getUser(username));
