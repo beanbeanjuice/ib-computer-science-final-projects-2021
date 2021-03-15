@@ -80,4 +80,11 @@ public class Main {
         return fileHandler;
     }
 
+    /**
+     * @return Get the {@link PasswordGenerator} object.
+     */
+    public static PasswordGenerator getPasswordGenerator() {
+        return passwordGenerator;
+    }
+
 }
