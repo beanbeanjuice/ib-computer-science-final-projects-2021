@@ -41,4 +41,4 @@ gradle.properties
 hs_err_pid*
 
 # Used to ignore the SQLite database
-database.db
+/database.db
