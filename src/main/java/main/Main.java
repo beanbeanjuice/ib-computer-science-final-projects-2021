@@ -1,28 +1,21 @@
 package main;
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-import javafx.application.Application;
-import main.file.FileHandler;
-import main.password.PasswordDictionary;
-import main.password.PasswordGenerator;
-=======
-import file.FileHandler;
-import password.PasswordDictionary;
-import password.PasswordGenerator;
->>>>>>> Stashed changes
-=======
-import file.FileHandler;
-import password.PasswordDictionary;
-import password.PasswordGenerator;
->>>>>>> Stashed changes
 
-public class Main {
+import file.FileHandler;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import password.PasswordDictionary;
+import password.PasswordGenerator;
+import screen.StartScreen;
+
+public class Main extends Application {
 
     // Variables
     private static FileHandler fileHandler;
     private static PasswordDictionary passwordDictionary;
     private static PasswordGenerator passwordGenerator;
+
+    private static Stage window;
 
     public static void main(String[] args) {
 
@@ -77,24 +70,22 @@ public class Main {
         passwordGenerator = new PasswordGenerator(1000, true, true, true);
         System.out.println(passwordGenerator.generatePassword());
 
+        // This is an example of how to use this in a GUI.
         launch(args);
 
     }
 
+    /**
+     * Starts the GUI.
+     * @param primaryStage The primary window of the {@link Stage}.
+     */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
 
         window = primaryStage;
-        window.setTitle("Test Game");
-        setWindow(new StartScreen());
+        window.setTitle("Password Generator");
+        window.setScene(new StartScreen().display());
         window.show();
-
-        // Consumes the "X" button or Mac/Linux equivalent.
-        // Stops the program from just closing.
-        window.setOnCloseRequest(e -> {
-            e.consume();
-            closeProgram();
-        });
 
     }
 
