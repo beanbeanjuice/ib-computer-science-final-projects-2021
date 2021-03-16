@@ -1,8 +1,21 @@
 package main;
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+import javafx.application.Application;
 import main.file.FileHandler;
 import main.password.PasswordDictionary;
 import main.password.PasswordGenerator;
+=======
+import file.FileHandler;
+import password.PasswordDictionary;
+import password.PasswordGenerator;
+>>>>>>> Stashed changes
+=======
+import file.FileHandler;
+import password.PasswordDictionary;
+import password.PasswordGenerator;
+>>>>>>> Stashed changes
 
 public class Main {
 
@@ -13,7 +26,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // Create a new FileHandler object.
+        // Create a new file.FileHandler object.
         // This can be any file handler of your choice/creation.
         fileHandler = new FileHandler();
 
@@ -63,6 +76,25 @@ public class Main {
         // A length of 1000 and includes everything.
         passwordGenerator = new PasswordGenerator(1000, true, true, true);
         System.out.println(passwordGenerator.generatePassword());
+
+        launch(args);
+
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        window = primaryStage;
+        window.setTitle("Test Game");
+        setWindow(new StartScreen());
+        window.show();
+
+        // Consumes the "X" button or Mac/Linux equivalent.
+        // Stops the program from just closing.
+        window.setOnCloseRequest(e -> {
+            e.consume();
+            closeProgram();
+        });
 
     }
 

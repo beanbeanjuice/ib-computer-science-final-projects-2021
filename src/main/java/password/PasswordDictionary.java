@@ -1,4 +1,4 @@
-package main.password;
+package password;
 
 import main.Main;
 import org.jetbrains.annotations.NotNull;
