@@ -8,6 +8,12 @@ import util.SignupInformation;
 
 public class LoginHandler {
 
+    /**
+     * Used to login a user.
+     * @param username The username of the {@link User}.
+     * @param password The un-encrypted password of the {@link User}.
+     * @return The {@link LoginInformation} containing the enum.
+     */
     @NotNull
     public LoginInformation login(@NotNull String username, @NotNull String password) {
 
@@ -41,6 +47,12 @@ public class LoginHandler {
 
     }
 
+    /**
+     * Used to sign the {@link User} in.
+     * @param username The username of the {@link User}.
+     * @param password The unencrypted password of the {@link User}.
+     * @return The {@link SignupInformation} enum.
+     */
     @NotNull
     public SignupInformation signup(@NotNull String username, @NotNull String password) {
 
