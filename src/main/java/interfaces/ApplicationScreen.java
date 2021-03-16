@@ -2,7 +2,6 @@ package interfaces;
 
 import game.Game;
 import javafx.scene.Scene;
-import testclass.TestClass;
 
 // Interfaces are basically like templates.
 // This means, every class that implements the interface
@@ -23,12 +22,11 @@ public interface ApplicationScreen {
      */
     Scene display();
 
-    // By default, getTestClass will return null
+    // By default, getGame will return null
     // UNLESS specified otherwise.
-
     /**
      * A default method that will be return null unless specified otherwise.
-     * @return Returns the {@link TestClass} object that may be needed.
+     * @return Returns the {@link Game} object that may be needed.
      */
     default Game getGame() {
         return null;
