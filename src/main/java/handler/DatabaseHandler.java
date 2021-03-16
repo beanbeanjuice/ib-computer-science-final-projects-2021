@@ -4,12 +4,11 @@ import main.Main;
 import object.User;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import util.AccountInformation;
 
 import java.util.ArrayList;
 
 /**
- * The {@link DatabaseHandler} class.
+ * A class used for handling the database.
  */
 public class DatabaseHandler {
 
@@ -31,8 +30,10 @@ public class DatabaseHandler {
     @NotNull
     public Boolean addToDatabase(@NotNull String username, @NotNull String password) {
 
+        // Converts the password to an encrypted password.
         String encryptedPassword = Main.getPasswordHandler().encryptPassword(password);
 
+        // Tries to add it to the database and returns true if it was successful.
         return database.add(new User(username, encryptedPassword));
     }
 
@@ -43,6 +44,7 @@ public class DatabaseHandler {
      */
     @NotNull
     public Boolean addToDatabase(@NotNull User user) {
+        // Separate method that uses a User object instead of a username and password.
         return database.add(user);
     }
 
@@ -53,6 +55,7 @@ public class DatabaseHandler {
      */
     @NotNull
     public Boolean removeFromDatabase(@NotNull User user) {
+        // Tries to remove it from the database and returns true if it was successful.
         return database.remove(user);
     }
 
@@ -64,6 +67,7 @@ public class DatabaseHandler {
     @NotNull
     public Boolean isInDatabase(@NotNull String username) {
 
+        // Searches for every user in the database and checks if that user is in it.
         for (User databaseUser : database) {
             if (databaseUser.getUsername().equalsIgnoreCase(username)) {
                 return true;
@@ -82,12 +86,14 @@ public class DatabaseHandler {
     @Nullable
     public User getUser(@NotNull String username) {
 
+        // Gets a user from their username.
         for (User user : database) {
             if (user.getUsername().equalsIgnoreCase(username)) {
                 return user;
             }
         }
 
+        // If the user does not exist, it returns null.
         return null;
 
     }

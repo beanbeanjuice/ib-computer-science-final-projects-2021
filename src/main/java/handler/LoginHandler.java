@@ -6,6 +6,9 @@ import org.jetbrains.annotations.NotNull;
 import util.LoginInformation;
 import util.SignupInformation;
 
+/**
+ * The class used for handling logins.
+ */
 public class LoginHandler {
 
     /**
@@ -29,6 +32,7 @@ public class LoginHandler {
         }
 
         // Since it does exist, get the user.
+        // This should not be null if the previous if statement passes.
         User user = Main.getDatabaseHandler().getUser(username);
 
         // Now we compare the password the user entered to the password stored in the database.
@@ -45,6 +49,16 @@ public class LoginHandler {
         // Inform the user that there was a successful login.
         return LoginInformation.SUCCESSFUL_LOGIN;
 
+    }
+
+    /**
+     * This is where you would put methods when wanting to log out a {@link User}.
+     */
+    public void logOut() {
+        Main.setCurrentUser(null);
+        Main.setLoggedIn(false);
+
+        // Put things in here to save to your database/anything you want to do.
     }
 
     /**
@@ -72,7 +86,7 @@ public class LoginHandler {
             return SignupInformation.SUCCESSFUL_SIGNUP;
         }
 
-        // If something wrong occurs, ie losing an internet connection, inform the user.
+        // If something wrong occurs, i.e. losing an internet connection, inform the user.
         return SignupInformation.CONNECTION_ERROR;
 
     }
