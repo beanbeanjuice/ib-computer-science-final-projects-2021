@@ -21,6 +21,7 @@ public class Main {
         boolean connected = sqLiteDataSource.createConnection();
 
         if (connected) {
+            // Things to do if the database is connected.
             System.out.println("Connected to the database!");
         }
 
@@ -29,7 +30,7 @@ public class Main {
 
         userHandler.addUser("test1", "password1");
 
-        System.out.println(userHandler.getUser("test1").getID()); // Should print out the ID of user "test1"
+        System.out.println("User ID: " + userHandler.getUser("test1").getID()); // Should print out the ID of user "test1"
         System.out.println("Username: " + userHandler.getUser("test1").getName());
         System.out.println("Password: " + userHandler.getUser("test1").getPassword());
         //System.out.println(userHandler.getUser("test2").getID()); // Returns null because the user was never added
