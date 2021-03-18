@@ -3,6 +3,11 @@ package main;
 import database.SQLiteDataSource;
 import database.UserHandler;
 
+// IMPORTANT
+// Go to Tools -> Preferences -> Libraries
+// Then add the jars from the "Required Jars" files into there.
+// This will allow the program to run.
+
 public class Main {
 
     private static SQLiteDataSource sqLiteDataSource;
