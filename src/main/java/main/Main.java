@@ -40,9 +40,6 @@ public class Main extends Application {
 
     }
 
-    // TODO: Move to Dialogue box
-    // TODO: Find a way to make the switching more obvious like background pictures/colours
-
     // Sets the current window. Custom interface created to house all of the screens.
     public static void setWindow(ApplicationScreen screen) {
         currentScreen = screen;
