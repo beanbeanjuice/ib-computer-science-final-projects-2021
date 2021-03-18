@@ -8,6 +8,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import util.LoginInformation;
 
+// IMPORTANT
+// Go to Tools -> Preferences -> Libraries
+// Then add the jars from the "Required Jars" files into there.
+// This will allow the program to run.
+
 public class Main {
 
     private static LoginHandler loginHandler;
