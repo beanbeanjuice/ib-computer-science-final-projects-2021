@@ -43,25 +43,29 @@ public class Main {
         LoginInformation loginInformation = loginHandler.login("bob", "testtest");
 
         switch (loginInformation) {
-            case INCORRECT_PASSWORD -> {
+            case INCORRECT_PASSWORD: {
                 // Methods to run when there is an incorrect password.
                 // For example, you can display the loginInformation.getMessage() on the gui.
                 System.out.println("INCORRECT PASSWORD: " + loginInformation.getMessage());
+                break;
             }
 
-            case CONNECTION_ERROR -> {
+            case CONNECTION_ERROR: {
                 // Methods to run when there is a connection error.
                 System.out.println("CONNECTION ERROR: " + loginInformation.getMessage());
+                break;
             }
 
-            case NO_USER -> {
+            case NO_USER: {
                 // Methods to be run when there is no user that exists with that name.
                 System.out.println("NO USER: " + loginInformation.getMessage());
+                break;
             }
 
-            case SUCCESSFUL_LOGIN -> {
+            case SUCCESSFUL_LOGIN: {
                 // Methods to be run when the user is able to login.
                 System.out.println("SUCCESSFUL: " + loginInformation.getMessage());
+                break;
             }
         }
 
